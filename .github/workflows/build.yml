@@ -23,7 +23,7 @@ jobs:
       - name: Checkout test repository
         uses: actions/checkout@v2
         with:
-          repository: romanow/web-calc-test
+          repository: Romanow/web-calc-test
           path: integration-tests
           ref: master
       - name: Run integration tests
