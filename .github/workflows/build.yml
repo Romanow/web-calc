@@ -20,9 +20,20 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: rsoi-web-calc
           heroku_email: romanowalex@mail.ru
-      - name: Run integration tests
-        uses: peter-evans/repository-dispatch@v1
+      - name: Checkout test repository
+        uses: actions/checkout@v2
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: romanow/web-calc-test
-          event-type: run-tests
+          path: integration-tests
+      - name: Run integration tests
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: clean build
+          build-root-directory: integration-tests
+
+#      - name: Run integration tests
+#        uses: peter-evans/repository-dispatch@v1
+#        with:
+#          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+#          repository: romanow/web-calc-test
+#          event-type: run-tests
